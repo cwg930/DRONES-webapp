@@ -30,7 +30,7 @@ class Login extends React.Component {
 	    dataType: 'json',
 	    type: 'POST',
 	    data: user,
-	    success: (data) => { this.props.route.handleResponse(data) },
+	    success: (data) => { this.props.handleResponse(data) },
 	    error: function(xhr, status, error) {
 		console.error(this.props.url, status, error.toString());
 	    }.bind(this)
@@ -83,6 +83,7 @@ class LoginBox extends React.Component {
 	    var password = this.state.password.trim();
 	    if(!username){
 		this.setState({errorTextUser: 'Required Field'});
+
 		return;
 	    }
 	    if(!password){

@@ -1,37 +1,23 @@
 import React from 'react';
-import {Router, Route, Link, IndexRoute, hashHistory, browserHistory} from 'react-router';
-import Login from './Login.jsx';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {withRouter} from 'react-router';
 
 class App extends React.Component {
     constructor(props) {
 	super(props);
-	this.handleLoginResponse = this.handleLoginResponse.bind(this)
+	this.handleLoginResponse = this.handleLoginResponse.bind(this);
+	this.state = {token: ''};
     }
     handleLoginResponse(data) {
-	console.log("logged in");
-	browserHistory.push('/success');
+	this.setState({token:data.token});
+	this.props.router.push('/home');
     }
     render() {
 	return (
-	    <MuiThemeProvider>
-	    <Router history={browserHistory}>
-		<Route path='/' component={Container}>
-		    <IndexRoute component={Login} handleResponse={this.handleLoginResponse}/>
-		    <Route path='/success' component={Success} />
-		    <Route path='*' component={NotFound} />
-		</Route>
-	    </Router>
-	    </MuiThemeProvider>
+	    <div>
+		{this.props.children && React.cloneElement(this.props.children, {handleResponse:this.handleLoginResponse, token: this.state.token})}
+	    </div>
 	)
     }
 }
 
-const Success = () => <h1>Logged In</h1>
-const NotFound = () => <h1>404 Not Found</h1>
-const Container = (props) => (
-    <div>
-	{props.children}
-    </div>
-)
-export default App
+export default withRouter(App);
