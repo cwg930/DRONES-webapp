@@ -6,6 +6,7 @@ import App from './App.jsx';
 import Login from './Login.jsx';
 import Home from './Home.jsx';
 import Map from './Map.jsx';
+import PlanCreator from './PlanCreator.jsx';
 
 class Container extends React.Component {
     constructor(props) {
@@ -14,7 +15,10 @@ class Container extends React.Component {
 	this.routes = (
 	    <Route path='/' component={App}>
 		<IndexRoute component={Login} />
-		<Route path='/home' component={Home}  />
+		<Route path='/home' component={Home}>
+		    <Route path='viewplan/:planId' component={Map} />
+		    <Route path='createplan' component={PlanCreator} />
+		</Route>
 	    </Route>
 	);
     }

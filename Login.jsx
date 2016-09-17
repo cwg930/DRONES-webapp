@@ -16,7 +16,6 @@ const boxStyle = {
     display: 'inline-block',
 };
 
-
 class Login extends React.Component {
     constructor(props) {
 	super(props);
@@ -26,7 +25,7 @@ class Login extends React.Component {
     
     handleLogin(user) {
 	$.ajax({
-	    url: "http://localhost:8080/login",
+	    url: this.props.url+"/login",
 	    dataType: 'json',
 	    type: 'POST',
 	    data: user,

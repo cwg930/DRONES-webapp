@@ -13,10 +13,8 @@ class Map extends React.Component {
 	this.state = {
 	    token:'',
 	    position:{
-		coords:{
 		    latitude:28.6024,
 		    longitude:-81.2001
-		}
 	    },
 	    plan: {
 		points:[]
@@ -25,7 +23,7 @@ class Map extends React.Component {
     }
     loadPoints() {
 	$.ajax({
-	    url: 'http://localhost:8080/flightplans/1',
+	    url: this.props.url+'/flightplans/' + this.props.params.planId,
 	    beforeSend: (xhr) => {
 		xhr.setRequestHeader("Authorization","Bearer " + this.state.token);
 	    },
@@ -40,28 +38,28 @@ class Map extends React.Component {
 	    }
 	});
     }
-    setPosition(position) {
+    setPosition() {
+	var lat = this.state.plan.points[0].lat;
+	var lon = this.state.plan.points[0].lon;
+	var position = {latitude:lat, longitude:lon};
 	this.setState({position:position})
-	console.log(this.state.position.coords);
-	console.log(typeof this.state.position.coords.latitude);
-	console.log(typeof this.state.position.coords.longitude);
     }
+	
     componentDidMount() {
 	var token = this.props.token;
 	console.log("token: " + token);
 	this.setState({token:token})
-	if(navigator.geolocation) {
-	    navigator.geolocation.getCurrentPosition(this.setPosition)
-	}
     }
     componentWillReceiveProps(nextProps) {
 	this.setState({token: nextProps.token})
 	console.log("recv props: " + this.state.token);
 	this.loadPoints();
+	this.setPosition();
     }
     render() {
 	console.log("map render state: ")
 	console.log(this.state.plan)
+	console.log(this.props.params.planId);
 	return (
 	    <GoogleMapLoader
 	    containerElement={
@@ -77,7 +75,7 @@ class Map extends React.Component {
 		ref={(map)=>(this._googleMapComponent = map) && console.log(map.getZoom())}
 		defaultZoom={19}
 		defaultCenter={{lat:28.6024, lng:-81.2001}}
-		center={{lat:this.state.position.coords.latitude, lng:this.state.position.coords.longitude}} 
+		center={{lat:this.state.position.latitude, lng:this.state.position.longitude}} 
 		>
 		{this.state.plan.points.map((marker, index) => {
 		    return (

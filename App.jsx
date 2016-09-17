@@ -1,5 +1,10 @@
 import React from 'react';
 import {withRouter} from 'react-router';
+import AppBar from 'material-ui/AppBar';
+
+const URL = "http://10.171.204.143:8080"
+//const URL = "http://localhost:8080"
+
 
 class App extends React.Component {
     constructor(props) {
@@ -14,7 +19,8 @@ class App extends React.Component {
     render() {
 	return (
 	    <div>
-		{this.props.children && React.cloneElement(this.props.children, {handleResponse:this.handleLoginResponse, token: this.state.token})}
+		<AppBar title="DRONES App" />
+		{this.props.children && React.cloneElement(this.props.children, {handleResponse:this.handleLoginResponse, token: this.state.token, url:URL})}
 	    </div>
 	)
     }

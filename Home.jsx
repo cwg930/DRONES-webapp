@@ -1,10 +1,11 @@
 import React from 'react';
 import $ from 'jquery';
 import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
-import {List, ListItem} from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import Map from './Map.jsx';
+import PlanCreator from './PlanCreator.jsx';
+import PlanList from './PlanList.jsx';
 
 const styles = {
     headline: {
@@ -25,7 +26,7 @@ class Home extends React.Component {
     }
     loadFileInfo() {
 	$.ajax({
-	    url: 'http://localhost:8080/flightplans',
+	    url: this.props.url+'/flightplans',
 	    beforeSend: (xhr) => {
 		xhr.setRequestHeader("Authorization","Bearer " + this.props.token);
 	    },
@@ -46,38 +47,22 @@ class Home extends React.Component {
 	this.setState({token: nextProps.token})
     }
     render() {
-	console.log("In Home render, token: " + this.state.token);
 	return (
 	    <Paper>
+		{this.props.children && React.cloneElement(this.props.children, {token:this.state.token, url:this.props.url})}
 		<Tabs>
-		    <Tab label="Your Files">
+		    <Tab label="Your Plans">
 			<div>
-			    <FileList data={this.state.data} />
+			    <PlanList data={this.state.data} url={this.props.url} />
 			</div>
 		    </Tab>
-		    <Tab label="Add File">
+		    <Tab label="Create Plan">
 			<div>
-			    <Map token={this.state.token} planid={this.state.data.id} />
+			    <PlanCreator token={this.state.token} url={this.props.url} />
 			</div>
 		    </Tab>
 		</Tabs>
 	    </Paper>
-	);
-    }
-}
-
-
-class FileList extends React.Component {
-    render() {
-	var listNodes = this.props.data.map((fileInfo) => {
-	    return (
-		<ListItem primaryText={fileInfo.name} key={fileInfo.id}/>
-	    );
-	});
-	return (
-	    <List>
-	    {listNodes}
-	    </List>
 	);
     }
 }
