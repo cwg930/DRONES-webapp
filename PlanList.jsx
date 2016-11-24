@@ -25,7 +25,7 @@ class PlanList extends React.Component {
 	return (
 	    <ReactGridLayout className="layout" cols={12} rowHeight={30} width={1200}>
 	    <div key="a" data-grid={{x:3,y:0,w:6,h:6, static:true}}>
-	    {this.props.children && React.cloneElement(this.props.children, {token:this.props.token, url:this.props.url})}
+		{this.props.children && React.cloneElement(this.props.children, {token:this.props.token, url:this.props.url})}
 	    </div>
 	    <div key="b" data-grid={{x:0, y:0, w: 3, h: 6, static:true}}>
 	    <Paper>

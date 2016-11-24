@@ -36,6 +36,9 @@ class ReportContainer extends React.Component {
 		<div key="a" data-grid={{x:0,y:0, w:3,h:6, static:true}}>
 		    <ReportList data={this.state.data} />
 		</div>
+		<div key="b" data-grid={{x:3,y:0, w:6,h:6, static:true}}>
+		    {this.props.children && React.cloneElement(this.props.children, {token:this.props.token, url:this.props.url, data:this.state.data})}
+		</div>
 	    </ReactGridLayout>
 	);
     }

@@ -11,6 +11,7 @@ import MapContainer from './MapContainer.jsx';
 import PlanCreator from './PlanCreator.jsx';
 import PlanList from './PlanList.jsx';
 import ReportContainer from './Reports.jsx';
+import ReportViewer from './ReportViewer.jsx';
 
 const containerStyle = {
     width: 1200,
@@ -33,6 +34,7 @@ class Container extends React.Component {
 		    </Route>
 		    <Route path='createplan' component={PlanCreator} />
 		    <Route path='reports' component={ReportContainer}>
+			<Route path=':reportId' component={ReportViewer} />
 		    </Route>
 		</Route>
 	    </Route>
