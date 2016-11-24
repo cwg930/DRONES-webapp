@@ -6,6 +6,9 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import Map from './Map.jsx';
 import PlanCreator from './PlanCreator.jsx';
 import PlanList from './PlanList.jsx';
+import RaisedButton from 'material-ui/RaisedButton';
+import {withRouter} from 'react-router';
+
 
 const styles = {
     headline: {
@@ -24,7 +27,7 @@ class Home extends React.Component {
 	    data:[]
 	}
     }
-    loadFileInfo() {
+    loadPlans() {
 	$.ajax({
 	    url: this.props.url+'/flightplans',
 	    beforeSend: (xhr) => {
@@ -41,30 +44,34 @@ class Home extends React.Component {
     componentDidMount() {
 	var token=this.props.token;
 	this.setState({token:token});
-	this.loadFileInfo();
+	this.loadPlans();
     }
     componentWillReceiveProps(nextProps) {
 	this.setState({token: nextProps.token})
     }
     render() {
 	return (
-	    <Paper>
-		{this.props.children && React.cloneElement(this.props.children, {token:this.state.token, url:this.props.url})}
-		<Tabs>
-		    <Tab label="Your Plans">
-			<div>
-			    <PlanList data={this.state.data} url={this.props.url} />
-			</div>
-		    </Tab>
-		    <Tab label="Create Plan">
-			<div>
-			    <PlanCreator token={this.state.token} url={this.props.url} />
-			</div>
-		    </Tab>
-		</Tabs>
-	    </Paper>
+	    <div>	    
+	    {this.props.children && React.cloneElement(this.props.children, {token:this.state.token, url:this.props.url, data:this.state.data})}
+
+	    </div>
 	);
     }
 }
 
+
 export default Home;
+/*
+<Tabs>
+<Tab label="Your Plans">
+<div>
+<PlanList data={this.state.data} url={this.props.url} />
+</div>
+</Tab>
+<Tab label="Create Plan">
+<div>
+<PlanCreator token={this.state.token} url={this.props.url} />
+</div>
+</Tab>
+</Tabs>
+*/

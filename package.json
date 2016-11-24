@@ -10,6 +10,7 @@
   "author": "Chris Grenci",
   "license": "ISC",
   "dependencies": {
+    "jquery": "^3.1.1",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
     "react-google-maps": "^4.11.0",

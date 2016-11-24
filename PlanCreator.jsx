@@ -4,6 +4,7 @@ import $ from 'jquery';
 import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
 import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 
 class PlanCreator extends React.Component {
     constructor(props) {
@@ -14,7 +15,7 @@ class PlanCreator extends React.Component {
 	this.state = {
 	    token:'',
 	    plan:{
-		name:'asdf',
+		name:"",
 	    },
 	    points:[]
 	}
@@ -82,6 +83,10 @@ class PlanCreator extends React.Component {
     render() {
 	return (
 	    <div>
+		<TextField 
+		    value={this.state.plan.name}
+		    onChange={ (event)=>{this.setState({plan:{name:event.target.value}})}}
+			     />
 	    <GoogleMapLoader
 	    containerElement={
 		<div
@@ -93,7 +98,7 @@ class PlanCreator extends React.Component {
 	    }
 	    googleMapElement={
 		<GoogleMap
-		ref={(map)=>(this._googleMapComponent = map) && console.log(map.getZoom())}
+		ref={(map)=>(this._googleMapComponent = map)}
 		defaultZoom={19}
 		defaultCenter={{lat:28.6024, lng:-81.2001}}
 		onClick={this.handleMapClick}

@@ -11,9 +11,11 @@ import RaisedButton from 'material-ui/RaisedButton';
 const boxStyle = {
     height: 'auto',
     width: 350,
-    margin: 30,
+    margin: 'auto',
+    marginTop: 30,
+    marginBottom: 30,
     textAlign: 'center',
-    display: 'inline-block',
+    display: 'block',
 };
 
 class Login extends React.Component {

@@ -8,19 +8,8 @@ const version = Math.ceil(Math.random() *22);
 class Map extends React.Component {
     constructor(props) {
 	super(props);
-	this.loadPoints = this.loadPoints.bind(this);
-	this.setPosition = this.setPosition.bind(this);
-	this.state = {
-	    token:'',
-	    position:{
-		    latitude:28.6024,
-		    longitude:-81.2001
-	    },
-	    plan: {
-		points:[]
-	    }
-	}
     }
+/*
     loadPoints() {
 	$.ajax({
 	    url: this.props.url+'/flightplans/' + this.props.params.planId,
@@ -43,12 +32,14 @@ class Map extends React.Component {
 	var lon = this.state.plan.points[0].lon;
 	var position = {latitude:lat, longitude:lon};
 	this.setState({position:position})
+	console.log(this.state.position);
     }
 	
     componentDidMount() {
 	var token = this.props.token;
 	console.log("token: " + token);
 	this.setState({token:token})
+	this.loadPoints();
     }
     componentWillReceiveProps(nextProps) {
 	this.setState({token: nextProps.token})
@@ -56,10 +47,10 @@ class Map extends React.Component {
 	this.loadPoints();
 	this.setPosition();
     }
+*/
     render() {
 	console.log("map render state: ")
-	console.log(this.state.plan)
-	console.log(this.props.params.planId);
+	console.log(this.props.plan)
 	return (
 	    <GoogleMapLoader
 	    containerElement={
@@ -72,12 +63,12 @@ class Map extends React.Component {
 	    }
 	    googleMapElement={
 		<GoogleMap
-		ref={(map)=>(this._googleMapComponent = map) && console.log(map.getZoom())}
+		ref={(map)=>(this._googleMapComponent = map)}
 		defaultZoom={19}
 		defaultCenter={{lat:28.6024, lng:-81.2001}}
-		center={{lat:this.state.position.latitude, lng:this.state.position.longitude}} 
+		center={{lat:this.props.position.latitude, lng:this.props.position.longitude}} 
 		>
-		{this.state.plan.points.map((marker, index) => {
+		{this.props.plan.points.map((marker, index) => {
 		    return (
 			<Marker 
 			position={{lat:marker.lat, lng:marker.lon}}
