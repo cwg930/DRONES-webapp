@@ -5,6 +5,8 @@ import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
 import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
+import ReactGridLayout from 'react-grid-layout';
 
 class PlanCreator extends React.Component {
     constructor(props) {
@@ -83,16 +85,32 @@ class PlanCreator extends React.Component {
     render() {
 	return (
 	    <div>
-		<TextField 
+		<Toolbar>
+		    <ToolbarGroup>
+			<ToolbarTitle text="Flight Plan Editor"/>
+		    </ToolbarGroup>
+		</Toolbar>
+		<ReactGridLayout cols={12} rowHeight={30} width={1200}>
+		<div key="a" data-grid={{x:0, y:0, w:3, h:6, static:true}}>
+		<TextField
+		    hintText="Plan name"
 		    value={this.state.plan.name}
 		    onChange={ (event)=>{this.setState({plan:{name:event.target.value}})}}
 			     />
+
+		<RaisedButton 
+		    label="Submit"
+		    primary={true}
+		    onClick={this.handleSubmit}
+		/>
+		</div>
+		<div key="b" data-grid={{x:3, y:0, w:6, h:6, static:true}}>
 	    <GoogleMapLoader
 	    containerElement={
 		<div
 		style={{
-		    height: '500px',
-		    width: '500px'
+		    height: '600px',
+		    width: '600px'
 		}}
 		/>
 	    }
@@ -114,11 +132,8 @@ class PlanCreator extends React.Component {
 		</GoogleMap>
 	    }
 	    />
-	    <RaisedButton 
-		label="Submit"
-		primary={true}
-		onClick={this.handleSubmit}
-	    />
+		</div>
+	    </ReactGridLayout>
 	    </div>
 	);
     }

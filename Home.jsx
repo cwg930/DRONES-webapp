@@ -51,7 +51,7 @@ class Home extends React.Component {
     }
     render() {
 	return (
-	    <div>	    
+	    <div>
 	    {this.props.children && React.cloneElement(this.props.children, {token:this.state.token, url:this.props.url, data:this.state.data})}
 
 	    </div>

@@ -32,6 +32,12 @@ class ReportContainer extends React.Component {
     }
     render() {
 	return (
+	    <div>
+	    <Toolbar>
+		<ToolbarGroup>
+		    <ToolbarTitle text="Your Reports"/>
+		</ToolbarGroup>
+	    </Toolbar>
 	    <ReactGridLayout cols={12} rowHeight={30} width={1200}>
 		<div key="a" data-grid={{x:0,y:0, w:3,h:6, static:true}}>
 		    <ReportList data={this.state.data} />
@@ -40,6 +46,7 @@ class ReportContainer extends React.Component {
 		    {this.props.children && React.cloneElement(this.props.children, {token:this.props.token, url:this.props.url, data:this.state.data})}
 		</div>
 	    </ReactGridLayout>
+	    </div>
 	);
     }
 }

@@ -57,7 +57,7 @@ class MapContainer extends React.Component {
     render() {
 	return(
 	    <div>
-		<Map plan={this.state.plan} position={this.state.position} />
+		<Map plan={this.state.plan} position={this.state.position}  />
 	    </div>
 	)
     }

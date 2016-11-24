@@ -3,10 +3,17 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {withRouter} from 'react-router';
 import Divider from 'material-ui/Divider';
 import ReactGridLayout from 'react-grid-layout';
+import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
 
 class MainMenu extends React.Component {
     render() {
 	return (
+	    <div>
+	    <Toolbar>
+		<ToolbarGroup>
+		    <ToolbarTitle text="Main Menu"/>
+		</ToolbarGroup>
+	    </Toolbar>
 	    <ReactGridLayout cols={12} rowHeight={30} width={1200}>
 		<div key="a" data-grid={{x:4, y:1, w:4, h:1, static:true}}>
 		    <RaisedButton label="View Reports" onClick={()=>{this.props.router.push("/home/reports")}} primary={true} fullWidth={true} />
@@ -18,6 +25,7 @@ class MainMenu extends React.Component {
 		    <RaisedButton label="Create Plan" onClick={()=>{this.props.router.push("/home/createplan")}} primary={true} fullWidth={true}/>
 		</div>
 	    </ReactGridLayout>
+	    </div>
 	);
     }
 }
