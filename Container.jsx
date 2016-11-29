@@ -9,7 +9,7 @@ import Home from './Home.jsx';
 import MainMenu from './MainMenu.jsx';
 import MapContainer from './MapContainer.jsx';
 import PlanCreator from './PlanCreator.jsx';
-import PlanList from './PlanList.jsx';
+import PlanViewer from './PlanViewer.jsx';
 import ReportContainer from './Reports.jsx';
 import ReportViewer from './ReportViewer.jsx';
 
@@ -29,7 +29,7 @@ class Container extends React.Component {
 		<IndexRoute component={Login} />
 		<Route path='/home' component={Home}>
 		    <IndexRoute component={MainMenu}/>
-		    <Route path='plans' component={PlanList}>
+		    <Route path='plans' component={PlanViewer}>
 			<Route path=':planId' component={MapContainer} />
 		    </Route>
 		    <Route path='createplan' component={PlanCreator} />

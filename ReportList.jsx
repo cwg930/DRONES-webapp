@@ -3,8 +3,6 @@ import {List, ListItem, MakeSelectable} from 'material-ui/List';
 import {withRouter} from 'react-router';
 let SelectableList = MakeSelectable(List)
 
-
-
 class ReportList extends React.Component {
     constructor(props) {
 	super(props);

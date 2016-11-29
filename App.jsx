@@ -4,8 +4,8 @@ import AppBar from 'material-ui/AppBar';
 import MenuItem from 'material-ui/Menu';
 import FlatButton from 'material-ui/FlatButton';
 
-//const URL = "http://10.171.204.143:8080"
-const URL = "http://localhost:8080"
+const URL = "http://10.171.204.143:8080"
+//const URL = "http://localhost:8080"
 
 class App extends React.Component {
     constructor(props) {

@@ -23,28 +23,13 @@ class Home extends React.Component {
     constructor(props) {
 	super(props);
 	this.state = {
-	    token:'',
-	    data:[]
+	    token: ''
 	}
     }
-    loadPlans() {
-	$.ajax({
-	    url: this.props.url+'/flightplans',
-	    beforeSend: (xhr) => {
-		xhr.setRequestHeader("Authorization","Bearer " + this.props.token);
-	    },
-	    method:'GET',
-	    cache: false,
-	    success: (data) => {this.setState({data: data})},
-	    error: (xhr, status, error) => {
-		console.error("",status,error.toString());
-	    }
-	});
-    }
+
     componentDidMount() {
-	var token=this.props.token;
+	var token = this.props.token;
 	this.setState({token:token});
-	this.loadPlans();
     }
     componentWillReceiveProps(nextProps) {
 	this.setState({token: nextProps.token})
@@ -52,8 +37,7 @@ class Home extends React.Component {
     render() {
 	return (
 	    <div>
-	    {this.props.children && React.cloneElement(this.props.children, {token:this.state.token, url:this.props.url, data:this.state.data})}
-
+	    {this.props.children && React.cloneElement(this.props.children, {token:this.state.token, url:this.props.url})}
 	    </div>
 	);
     }

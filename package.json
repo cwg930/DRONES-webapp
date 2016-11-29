@@ -2,10 +2,10 @@
   "name": "drones-webapp",
   "version": "1.0.0",
   "description": "webapp for DRONES",
-  "main": "index.js",
+  "main": "bundle.js",
   "scripts": {
     "start": "webpack-dev-server --hot",
-    "build": "webpack --config webpack.config.js -p"
+    "build": "webpack -p --config webpack.production.config.js"
   },
   "author": "Chris Grenci",
   "license": "ISC",
