@@ -20,7 +20,7 @@ class ReportViewer extends React.Component {
 	this.setState({openDialog: true, dialogImage: id})
     }
     render() {
-	var files = this.props.data[this.props.params.reportId-1].files.map((file)=>{
+	var files = this.props.data[this.props.params.reportId].files.map((file)=>{
 	    return (
 		<GridTile 
 		    key={file.id}
@@ -35,7 +35,7 @@ class ReportViewer extends React.Component {
 	return (
 	    <div>
 	    <GridList cellHeight={180} style={{overflowY:'auto'}}>
-		<Subheader>{this.props.data[this.props.params.reportId-1].name}</Subheader>
+		<Subheader>{this.props.data[this.props.params.reportId].name}</Subheader>
 		{files}
 	    </GridList>
 	    <Dialog
@@ -69,8 +69,6 @@ class GridImage extends React.Component {
     
     componentDidMount() {
 	this.loadImage(this.props.id)
-	console.log("GridImage mounted")
-	console.log(this.props.id)
     }
     render() {
 	return (

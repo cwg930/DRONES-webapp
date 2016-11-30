@@ -9,10 +9,16 @@ class ReportList extends React.Component {
 	this.onListItemSelected = this.onListItemSelected.bind(this);
     }
     onListItemSelected(event, index) {
-	this.props.router.push('/home/reports/' + index.id);
+
+	console.log("Item selected: ")
+	console.log(index.arrayVal)
+	this.props.router.push('/home/reports/' + index.arrayVal);
     }
     render() {
+	var i = 0;
 	var listNodes = this.props.data.map((report) => {
+	    report.arrayVal = i;
+	    i++;
 	    return (
 		<ListItem primaryText={report.name} key={report.id} value={report} />
 	    );
